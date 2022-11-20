@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PathVariable;
-
+import org.springframework.web.bind.annotation.GetMapping;
 @RequestMapping("/question")
 @RequiredArgsConstructor
 @Controller
@@ -35,5 +35,10 @@ public class QuestionController {
 		Question question = this.questionService.getQuestion(id);
         model.addAttribute("question", question);
         return "question_detail";
+    }
+	
+	@GetMapping("/create")
+    public String questionCreate() {
+        return "question_form";
     }
 }
