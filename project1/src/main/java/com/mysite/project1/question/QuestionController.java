@@ -10,6 +10,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.GetMapping;
+
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+
+import javax.validation.Valid;
+import org.springframework.validation.BindingResult;
 @RequestMapping("/question")
 @RequiredArgsConstructor
 @Controller
@@ -41,4 +48,14 @@ public class QuestionController {
     public String questionCreate() {
         return "question_form";
     }
+	
+	@PostMapping("/create")
+    public String questionCreate(@Valid QuestionForm questionForm, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "question_form";
+        }
+        
+        this.questionService.create(questionForm.getSubject(), questionForm.getContent());
+        return "redirect:/question/list";
+	}
 }
