@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
 import org.springframework.validation.BindingResult;
+import com.mysite.project1.answer.AnswerForm;
 @RequestMapping("/question")
 @RequiredArgsConstructor
 @Controller
@@ -38,14 +39,14 @@ public class QuestionController {
     }
 	
 	@RequestMapping(value = "/detail/{id}")
-    public String detail(Model model, @PathVariable("id") Integer id) {
+    public String detail(Model model, @PathVariable("id") Integer id, AnswerForm answerFrom) {
 		Question question = this.questionService.getQuestion(id);
         model.addAttribute("question", question);
         return "question_detail";
     }
 	
 	@GetMapping("/create")
-    public String questionCreate() {
+    public String questionCreate(QuestionForm questionForm) {
         return "question_form";
     }
 	
