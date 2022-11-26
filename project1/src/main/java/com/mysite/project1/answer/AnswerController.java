@@ -25,8 +25,8 @@ public class AnswerController {
     public String createAnswer(Model model, @PathVariable("id") Integer id, @Valid AnswerForm answerForm, BindingResult bindingResult) {
         Question question = this.questionService.getQuestion(id);
         if (bindingResult.hasErrors()) {
-        	model.addAttribute("qustion", question);
-        	return "question_detail";
+            model.addAttribute("question", question);
+            return "question_detail";
         }
         // TODO: 답변을 저장한다. 
         this.answerService.create(question, answerForm.getContent());
