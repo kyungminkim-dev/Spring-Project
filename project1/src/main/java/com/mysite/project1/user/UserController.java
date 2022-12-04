@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import org.springframework.dao.DataIntegrityViolationException;
+
 import lombok.RequiredArgsConstructor;
 
 
@@ -34,8 +36,16 @@ public class UserController {
 			return "signup_form";
 		}
 		
+		try {
 		userService.create(userCreateForm.getUsername(), userCreateForm.getEmail(), userCreateForm.getPassword1());
 		
+		}catch(DataIntegrityViolationException e) {
+			e.printStackTrace();
+			bindingResult.reject("signupFailed", "이미 등록된 사용자입니다.");
+		}catch(Exception e) {
+			e.printStackTrace();
+			bindingResult.reject("signupFailed", e.getMessage());
+		}
 		return "redirect:/";
 	}
 
