@@ -17,10 +17,12 @@ import com.mysite.project1.user.UserSecurityService;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 
 @RequiredArgsConstructor
 @Configuration
 @EnableWebSecurity
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig {
 	private final UserSecurityService userSecurityService;
 	@Bean

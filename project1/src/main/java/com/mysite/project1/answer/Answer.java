@@ -13,6 +13,8 @@ import lombok.Setter;
 import javax.persistence.ManyToOne;
 import com.mysite.project1.question.Question;
 
+import com.mysite.project1.user.SiteUser;
+
 @Getter
 @Setter
 @Entity
@@ -28,5 +30,8 @@ public class Answer {
     
     @ManyToOne
     private Question question;
+    
+    @ManyToOne
+    private SiteUser author;
 
 }

@@ -13,6 +13,9 @@ import javax.persistence.OneToMany;
 
 import com.mysite.project1.answer.Answer;
 
+import javax.persistence.ManyToOne;
+import com.mysite.project1.user.SiteUser;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -34,4 +37,7 @@ public class Question {
     
     @OneToMany(mappedBy = "question", cascade = CascadeType.REMOVE)
     private List<Answer> answerList;
+    
+    @ManyToOne
+    private SiteUser author;
 }
